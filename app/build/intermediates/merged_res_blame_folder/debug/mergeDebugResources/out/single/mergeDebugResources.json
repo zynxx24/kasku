@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.kasku.app-debug-50:/drawable_qris_code.jpg.flat",
+        "source": "com.kasku.app-main-52:/drawable/qris_code.jpg"
+    },
+    {
+        "merged": "com.kasku.app-debug-50:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.kasku.app-main-52:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.kasku.app-debug-50:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.kasku.app-main-52:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.kasku.app-debug-50:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.kasku.app-main-52:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.kasku.app-debug-50:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.kasku.app-main-52:/mipmap-anydpi-v26/ic_launcher.xml"
+    }
+]

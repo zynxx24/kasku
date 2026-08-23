@@ -1,0 +1,319 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:2:1-22:12
+MERGED from [androidx.navigation:navigation-common:2.7.7] /home/wira/.gradle/caches/transforms-4/e17de8a2ae96fbcd31c4752c9924903d/transformed/navigation-common-2.7.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime:2.7.7] /home/wira/.gradle/caches/transforms-4/7fc559b8cb16a76c21f192e69614a5cf/transformed/navigation-runtime-2.7.7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] /home/wira/.gradle/caches/transforms-4/d840bbc7776e53d19ed7d783b8e74338/transformed/navigation-common-ktx-2.7.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.7.7] /home/wira/.gradle/caches/transforms-4/e2d9eece7f8847e2d1e3b2460bd320e3/transformed/navigation-runtime-ktx-2.7.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-compose:2.7.7] /home/wira/.gradle/caches/transforms-4/161ae621975ad78d9d1dfb2e27c16d4b/transformed/navigation-compose-2.7.7/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/wira/.gradle/caches/transforms-4/f43a357f76f6f0a20fe1e43df88cb8b5/transformed/material3-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-android:1.6.7] /home/wira/.gradle/caches/transforms-4/49ad96214c3490db24130bc6620dee2a/transformed/material-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.7] /home/wira/.gradle/caches/transforms-4/d96d154e21591fef352c201273365c43/transformed/material-icons-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-extended-android:1.6.7] /home/wira/.gradle/caches/transforms-4/cb96b3c9cc14313a7aff2f934fe93b8b/transformed/material-icons-extended-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-ripple-android:1.6.7] /home/wira/.gradle/caches/transforms-4/87c1dd6c8ba261dcfac83d19e107865c/transformed/material-ripple-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.6.7] /home/wira/.gradle/caches/transforms-4/bcf2cb59d3b5390876b38d25f2da7835/transformed/animation-core-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.6.7] /home/wira/.gradle/caches/transforms-4/cb3095dbf44a566b229acccc7d2e7ad6/transformed/animation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.7] /home/wira/.gradle/caches/transforms-4/95a3c2ec1c9e34b0686d5e94c55e1d23/transformed/foundation-layout-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.6.7] /home/wira/.gradle/caches/transforms-4/abaaa7b3971e2a79731cbe22000388d9/transformed/foundation-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.7] /home/wira/.gradle/caches/transforms-4/4e9af584fadf3fae3b277039a959c0bd/transformed/ui-tooling-data-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.7] /home/wira/.gradle/caches/transforms-4/2b879bd264cd59d36d95ef2b19598562/transformed/ui-unit-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.7] /home/wira/.gradle/caches/transforms-4/214843427e0addfab55d2c823bc307b3/transformed/ui-geometry-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-util-android:1.6.7] /home/wira/.gradle/caches/transforms-4/1e97dc3f55d03f94e934be649867b6a5/transformed/ui-util-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.7] /home/wira/.gradle/caches/transforms-4/997cdb1d98c0933b287ffb2b8f760861/transformed/ui-tooling-preview-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.7] /home/wira/.gradle/caches/transforms-4/ee81e1a7364b6ac80de51cc8e01ae8de/transformed/ui-graphics-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.6.7] /home/wira/.gradle/caches/transforms-4/0ad70418c8b96e78a322d45e56b0cfcf/transformed/ui-text-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.0] /home/wira/.gradle/caches/transforms-4/97fc43f3486c933ace070c03a5c8d9bc/transformed/lifecycle-livedata-core-2.8.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/wira/.gradle/caches/transforms-4/18f4c7633dc1802e6ffb8e372ec16075/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/wira/.gradle/caches/transforms-4/9c2630d0fdfa609f3980c1ddcc27ad25/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.0] /home/wira/.gradle/caches/transforms-4/e031904c0fec76fc90e39e90d5536aa4/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.0] /home/wira/.gradle/caches/transforms-4/c3292273039884ff8b11a45357f10803/transformed/lifecycle-runtime-release/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0] /home/wira/.gradle/caches/transforms-4/33b03b73a5703ca06c0fcb92c2ec8aac/transformed/lifecycle-viewmodel-ktx-2.8.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.0] /home/wira/.gradle/caches/transforms-4/b3d47285efa5f7ef6baab73e1726dbe5/transformed/lifecycle-viewmodel-savedstate-2.8.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.0] /home/wira/.gradle/caches/transforms-4/d4b927cba55f1eccb0681a135a0415e4/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.0] /home/wira/.gradle/caches/transforms-4/2246fd78f63e5cc87ed95232a469d241/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.6.7] /home/wira/.gradle/caches/transforms-4/c0fc5042991dc846e6307086a6f215d5/transformed/ui-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.activity:activity-compose:1.9.0] /home/wira/.gradle/caches/transforms-4/7f613ca4abb818cc571ddaea70817885/transformed/activity-compose-1.9.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-ktx:1.9.0] /home/wira/.gradle/caches/transforms-4/b9706cde2015ae9e6fab378a72423e2a/transformed/activity-ktx-1.9.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity:1.9.0] /home/wira/.gradle/caches/transforms-4/296c8320d4d47c00a1d469ce19f1e7ef/transformed/activity-1.9.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.autofill:autofill:1.0.0] /home/wira/.gradle/caches/transforms-4/6dc3204ace3d22add624b21cb2d451ba/transformed/autofill-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/wira/.gradle/caches/transforms-4/f0f9ffc95fc008c11e9e7a67a56e0d9d/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.13.1] /home/wira/.gradle/caches/transforms-4/67f7d6ee3b176edbcc730b7414fd2ba6/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/wira/.gradle/caches/transforms-4/9b5c7ecce9d9648789a9f5d5af85f209/transformed/runtime-saveable-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/wira/.gradle/caches/transforms-4/2626830e7eca674d48daed5cf88d5ca6/transformed/runtime-release/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/wira/.gradle/caches/transforms-4/6ca9f5518a17ef8fc7434622cf307f3f/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/wira/.gradle/caches/transforms-4/9dca35f036f662ea7a9e4b548b1774b2/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/wira/.gradle/caches/transforms-4/c5e3a3ff9166c7eaacd66a213d037c01/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/wira/.gradle/caches/transforms-4/60032b1fd07a36b96ccbdcfee1c0c5f5/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/wira/.gradle/caches/transforms-4/6cc418999ad7d633fa9eeda1888e5f91/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+	package
+		INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:4:5-20:19
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:4:5-20:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/wira/.gradle/caches/transforms-4/c5e3a3ff9166c7eaacd66a213d037c01/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/wira/.gradle/caches/transforms-4/c5e3a3ff9166c7eaacd66a213d037c01/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:7:9-41
+	android:roundIcon
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:8:9-54
+	android:icon
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:6:9-43
+	android:allowBackup
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:5:9-35
+	android:theme
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:10:9-43
+activity#com.kasku.app.MainActivity
+ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:11:9-19:20
+	android:exported
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:13:13-36
+	android:theme
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:14:13-47
+	android:name
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:12:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:15:13-18:29
+action#android.intent.action.MAIN
+ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:17:17-77
+	android:name
+		ADDED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml:17:27-74
+uses-sdk
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+MERGED from [androidx.navigation:navigation-common:2.7.7] /home/wira/.gradle/caches/transforms-4/e17de8a2ae96fbcd31c4752c9924903d/transformed/navigation-common-2.7.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.7.7] /home/wira/.gradle/caches/transforms-4/e17de8a2ae96fbcd31c4752c9924903d/transformed/navigation-common-2.7.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.7.7] /home/wira/.gradle/caches/transforms-4/7fc559b8cb16a76c21f192e69614a5cf/transformed/navigation-runtime-2.7.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.7.7] /home/wira/.gradle/caches/transforms-4/7fc559b8cb16a76c21f192e69614a5cf/transformed/navigation-runtime-2.7.7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] /home/wira/.gradle/caches/transforms-4/d840bbc7776e53d19ed7d783b8e74338/transformed/navigation-common-ktx-2.7.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] /home/wira/.gradle/caches/transforms-4/d840bbc7776e53d19ed7d783b8e74338/transformed/navigation-common-ktx-2.7.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.7.7] /home/wira/.gradle/caches/transforms-4/e2d9eece7f8847e2d1e3b2460bd320e3/transformed/navigation-runtime-ktx-2.7.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.7.7] /home/wira/.gradle/caches/transforms-4/e2d9eece7f8847e2d1e3b2460bd320e3/transformed/navigation-runtime-ktx-2.7.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.7.7] /home/wira/.gradle/caches/transforms-4/161ae621975ad78d9d1dfb2e27c16d4b/transformed/navigation-compose-2.7.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-compose:2.7.7] /home/wira/.gradle/caches/transforms-4/161ae621975ad78d9d1dfb2e27c16d4b/transformed/navigation-compose-2.7.7/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/wira/.gradle/caches/transforms-4/f43a357f76f6f0a20fe1e43df88cb8b5/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.2.1] /home/wira/.gradle/caches/transforms-4/f43a357f76f6f0a20fe1e43df88cb8b5/transformed/material3-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.6.7] /home/wira/.gradle/caches/transforms-4/49ad96214c3490db24130bc6620dee2a/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.6.7] /home/wira/.gradle/caches/transforms-4/49ad96214c3490db24130bc6620dee2a/transformed/material-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.7] /home/wira/.gradle/caches/transforms-4/d96d154e21591fef352c201273365c43/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.6.7] /home/wira/.gradle/caches/transforms-4/d96d154e21591fef352c201273365c43/transformed/material-icons-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.6.7] /home/wira/.gradle/caches/transforms-4/cb96b3c9cc14313a7aff2f934fe93b8b/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-extended-android:1.6.7] /home/wira/.gradle/caches/transforms-4/cb96b3c9cc14313a7aff2f934fe93b8b/transformed/material-icons-extended-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.7] /home/wira/.gradle/caches/transforms-4/87c1dd6c8ba261dcfac83d19e107865c/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.6.7] /home/wira/.gradle/caches/transforms-4/87c1dd6c8ba261dcfac83d19e107865c/transformed/material-ripple-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.7] /home/wira/.gradle/caches/transforms-4/bcf2cb59d3b5390876b38d25f2da7835/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.6.7] /home/wira/.gradle/caches/transforms-4/bcf2cb59d3b5390876b38d25f2da7835/transformed/animation-core-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.7] /home/wira/.gradle/caches/transforms-4/cb3095dbf44a566b229acccc7d2e7ad6/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.6.7] /home/wira/.gradle/caches/transforms-4/cb3095dbf44a566b229acccc7d2e7ad6/transformed/animation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.7] /home/wira/.gradle/caches/transforms-4/95a3c2ec1c9e34b0686d5e94c55e1d23/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.6.7] /home/wira/.gradle/caches/transforms-4/95a3c2ec1c9e34b0686d5e94c55e1d23/transformed/foundation-layout-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.7] /home/wira/.gradle/caches/transforms-4/abaaa7b3971e2a79731cbe22000388d9/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.6.7] /home/wira/.gradle/caches/transforms-4/abaaa7b3971e2a79731cbe22000388d9/transformed/foundation-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.7] /home/wira/.gradle/caches/transforms-4/4e9af584fadf3fae3b277039a959c0bd/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.6.7] /home/wira/.gradle/caches/transforms-4/4e9af584fadf3fae3b277039a959c0bd/transformed/ui-tooling-data-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.7] /home/wira/.gradle/caches/transforms-4/2b879bd264cd59d36d95ef2b19598562/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.6.7] /home/wira/.gradle/caches/transforms-4/2b879bd264cd59d36d95ef2b19598562/transformed/ui-unit-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.7] /home/wira/.gradle/caches/transforms-4/214843427e0addfab55d2c823bc307b3/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.6.7] /home/wira/.gradle/caches/transforms-4/214843427e0addfab55d2c823bc307b3/transformed/ui-geometry-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.7] /home/wira/.gradle/caches/transforms-4/1e97dc3f55d03f94e934be649867b6a5/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.6.7] /home/wira/.gradle/caches/transforms-4/1e97dc3f55d03f94e934be649867b6a5/transformed/ui-util-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.7] /home/wira/.gradle/caches/transforms-4/997cdb1d98c0933b287ffb2b8f760861/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.6.7] /home/wira/.gradle/caches/transforms-4/997cdb1d98c0933b287ffb2b8f760861/transformed/ui-tooling-preview-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.7] /home/wira/.gradle/caches/transforms-4/ee81e1a7364b6ac80de51cc8e01ae8de/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.6.7] /home/wira/.gradle/caches/transforms-4/ee81e1a7364b6ac80de51cc8e01ae8de/transformed/ui-graphics-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.7] /home/wira/.gradle/caches/transforms-4/0ad70418c8b96e78a322d45e56b0cfcf/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.6.7] /home/wira/.gradle/caches/transforms-4/0ad70418c8b96e78a322d45e56b0cfcf/transformed/ui-text-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.0] /home/wira/.gradle/caches/transforms-4/97fc43f3486c933ace070c03a5c8d9bc/transformed/lifecycle-livedata-core-2.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.0] /home/wira/.gradle/caches/transforms-4/97fc43f3486c933ace070c03a5c8d9bc/transformed/lifecycle-livedata-core-2.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/wira/.gradle/caches/transforms-4/18f4c7633dc1802e6ffb8e372ec16075/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/wira/.gradle/caches/transforms-4/18f4c7633dc1802e6ffb8e372ec16075/transformed/savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/wira/.gradle/caches/transforms-4/9c2630d0fdfa609f3980c1ddcc27ad25/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/wira/.gradle/caches/transforms-4/9c2630d0fdfa609f3980c1ddcc27ad25/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.0] /home/wira/.gradle/caches/transforms-4/e031904c0fec76fc90e39e90d5536aa4/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.0] /home/wira/.gradle/caches/transforms-4/e031904c0fec76fc90e39e90d5536aa4/transformed/lifecycle-viewmodel-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.0] /home/wira/.gradle/caches/transforms-4/c3292273039884ff8b11a45357f10803/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.0] /home/wira/.gradle/caches/transforms-4/c3292273039884ff8b11a45357f10803/transformed/lifecycle-runtime-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0] /home/wira/.gradle/caches/transforms-4/33b03b73a5703ca06c0fcb92c2ec8aac/transformed/lifecycle-viewmodel-ktx-2.8.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0] /home/wira/.gradle/caches/transforms-4/33b03b73a5703ca06c0fcb92c2ec8aac/transformed/lifecycle-viewmodel-ktx-2.8.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.0] /home/wira/.gradle/caches/transforms-4/b3d47285efa5f7ef6baab73e1726dbe5/transformed/lifecycle-viewmodel-savedstate-2.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.0] /home/wira/.gradle/caches/transforms-4/b3d47285efa5f7ef6baab73e1726dbe5/transformed/lifecycle-viewmodel-savedstate-2.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.0] /home/wira/.gradle/caches/transforms-4/d4b927cba55f1eccb0681a135a0415e4/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.0] /home/wira/.gradle/caches/transforms-4/d4b927cba55f1eccb0681a135a0415e4/transformed/lifecycle-runtime-ktx-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.0] /home/wira/.gradle/caches/transforms-4/2246fd78f63e5cc87ed95232a469d241/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.0] /home/wira/.gradle/caches/transforms-4/2246fd78f63e5cc87ed95232a469d241/transformed/lifecycle-viewmodel-compose-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.7] /home/wira/.gradle/caches/transforms-4/c0fc5042991dc846e6307086a6f215d5/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.6.7] /home/wira/.gradle/caches/transforms-4/c0fc5042991dc846e6307086a6f215d5/transformed/ui-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-compose:1.9.0] /home/wira/.gradle/caches/transforms-4/7f613ca4abb818cc571ddaea70817885/transformed/activity-compose-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.9.0] /home/wira/.gradle/caches/transforms-4/7f613ca4abb818cc571ddaea70817885/transformed/activity-compose-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.0] /home/wira/.gradle/caches/transforms-4/b9706cde2015ae9e6fab378a72423e2a/transformed/activity-ktx-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.9.0] /home/wira/.gradle/caches/transforms-4/b9706cde2015ae9e6fab378a72423e2a/transformed/activity-ktx-1.9.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity:1.9.0] /home/wira/.gradle/caches/transforms-4/296c8320d4d47c00a1d469ce19f1e7ef/transformed/activity-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.9.0] /home/wira/.gradle/caches/transforms-4/296c8320d4d47c00a1d469ce19f1e7ef/transformed/activity-1.9.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] /home/wira/.gradle/caches/transforms-4/6dc3204ace3d22add624b21cb2d451ba/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] /home/wira/.gradle/caches/transforms-4/6dc3204ace3d22add624b21cb2d451ba/transformed/autofill-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/wira/.gradle/caches/transforms-4/f0f9ffc95fc008c11e9e7a67a56e0d9d/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] /home/wira/.gradle/caches/transforms-4/f0f9ffc95fc008c11e9e7a67a56e0d9d/transformed/customview-poolingcontainer-1.0.0/AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.13.1] /home/wira/.gradle/caches/transforms-4/67f7d6ee3b176edbcc730b7414fd2ba6/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /home/wira/.gradle/caches/transforms-4/67f7d6ee3b176edbcc730b7414fd2ba6/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/wira/.gradle/caches/transforms-4/9b5c7ecce9d9648789a9f5d5af85f209/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.7] /home/wira/.gradle/caches/transforms-4/9b5c7ecce9d9648789a9f5d5af85f209/transformed/runtime-saveable-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/wira/.gradle/caches/transforms-4/2626830e7eca674d48daed5cf88d5ca6/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.6.7] /home/wira/.gradle/caches/transforms-4/2626830e7eca674d48daed5cf88d5ca6/transformed/runtime-release/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/wira/.gradle/caches/transforms-4/6ca9f5518a17ef8fc7434622cf307f3f/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /home/wira/.gradle/caches/transforms-4/6ca9f5518a17ef8fc7434622cf307f3f/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/wira/.gradle/caches/transforms-4/9dca35f036f662ea7a9e4b548b1774b2/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/wira/.gradle/caches/transforms-4/9dca35f036f662ea7a9e4b548b1774b2/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/wira/.gradle/caches/transforms-4/c5e3a3ff9166c7eaacd66a213d037c01/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/wira/.gradle/caches/transforms-4/c5e3a3ff9166c7eaacd66a213d037c01/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/wira/.gradle/caches/transforms-4/60032b1fd07a36b96ccbdcfee1c0c5f5/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/wira/.gradle/caches/transforms-4/60032b1fd07a36b96ccbdcfee1c0c5f5/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/wira/.gradle/caches/transforms-4/6cc418999ad7d633fa9eeda1888e5f91/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/wira/.gradle/caches/transforms-4/6cc418999ad7d633fa9eeda1888e5f91/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+	android:targetSdkVersion
+		INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/wira/Documents/kasku/app/src/main/AndroidManifest.xml
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/wira/.gradle/caches/transforms-4/d857b6199f2e5ab23544467888351967/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /home/wira/.gradle/caches/transforms-4/f4e7b0f6f91e1cf454e13fa10740eba2/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.0] /home/wira/.gradle/caches/transforms-4/cf1113d484ac700352ac2d8dd8117182/transformed/lifecycle-process-2.8.0/AndroidManifest.xml:30:17-78
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.6.7] /home/wira/.gradle/caches/transforms-4/e29a51f60c089142df481bd1d5b742e8/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#com.kasku.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#com.kasku.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /home/wira/.gradle/caches/transforms-4/a5c5bd09d2963cf9b67e77e80e5fedb6/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /home/wira/.gradle/caches/transforms-4/10d889a7d3125cbd359d7e3122260cda/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
