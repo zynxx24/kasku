@@ -26,6 +26,13 @@ import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.SwapVert
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Done
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -69,6 +76,7 @@ fun HomeScreen(
     var showRiwayatSheet by remember { mutableStateOf(false) }
     var showMemberSheet by remember { mutableStateOf(false) }
     var showMonthPicker by remember { mutableStateOf(false) }
+    var showNotifSheet by remember { mutableStateOf(false) }
     var selectedMonth by remember { mutableStateOf("Agustus 2026") }
 
     Column(
@@ -101,7 +109,7 @@ fun HomeScreen(
                     ),
                     color = Color.White
                 )
-                IconButton(onClick = {}) {
+                IconButton(onClick = { showNotifSheet = true }) {
                     Icon(
                         Icons.Default.Notifications,
                         contentDescription = "Notifikasi",
@@ -550,6 +558,13 @@ fun HomeScreen(
             selectedMonth = selectedMonth,
             onSelectMonth = { selectedMonth = it },
             onDismiss = { showMonthPicker = false }
+        )
+    }
+
+    // Notification Log Bottom Sheet
+    if (showNotifSheet) {
+        NotificationLogSheet(
+            onDismiss = { showNotifSheet = false }
         )
     }
 }
@@ -1108,6 +1123,204 @@ fun MonthPickerSheet(
             }
 
             Spacer(modifier = Modifier.height(24.dp))
+        }
+    }
+}
+
+// ── Bottom Sheet: Notification Log ───────────────────────────────────────
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
+@Composable
+fun NotificationLogSheet(
+    onDismiss: () -> Unit
+) {
+    val textPrimary = MaterialTheme.colorScheme.onBackground
+    val textSecondary = MaterialTheme.colorScheme.onSurfaceVariant
+    val cardColor = MaterialTheme.colorScheme.surface
+
+    data class NotifItem(
+        val icon: ImageVector,
+        val iconColor: Color,
+        val title: String,
+        val desc: String,
+        val time: String,
+        val isNew: Boolean = false
+    )
+
+    val notifications = listOf(
+        NotifItem(
+            icon = Icons.Default.Notifications,
+            iconColor = HeaderBlue,
+            title = "Update v1.0.1 Tersedia",
+            desc = "Pembaruan fitur: Daftar Siswa interaktif, Pemilih Bulan Aktif, dan perbaikan Mode Gelap.",
+            time = "25 Agu 2026, 08:00",
+            isNew = true
+        ),
+        NotifItem(
+            icon = Icons.Default.ArrowUpward,
+            iconColor = IncomeGreen,
+            title = "Pembayaran Kas Diterima",
+            desc = "NI KADEK LINA ANTIKA DEWI telah membayar iuran kas Agustus 2026 sebesar Rp 10.000.",
+            time = "24 Agu 2026, 14:32",
+            isNew = true
+        ),
+        NotifItem(
+            icon = Icons.Default.Email,
+            iconColor = ExpenseRed,
+            title = "Pengingat: 11 Siswa Belum Bayar",
+            desc = "Masih ada 11 siswa yang belum melunasi iuran kas bulan Agustus 2026. Segera ingatkan.",
+            time = "23 Agu 2026, 09:00",
+            isNew = false
+        ),
+        NotifItem(
+            icon = Icons.Default.Edit,
+            iconColor = HeaderBlue,
+            title = "Patch v1.0.0 Diterapkan",
+            desc = "Perbaikan bug: Kartu QRIS tidak tampil pada dialog Kas Masuk. Tema putih minimalis diterapkan.",
+            time = "22 Agu 2026, 20:15",
+            isNew = false
+        ),
+        NotifItem(
+            icon = Icons.Default.Add,
+            iconColor = CardBlue,
+            title = "Anggota Baru Ditambahkan",
+            desc = "RADITYA RONDI telah ditambahkan ke daftar anggota kelas XII PPLG sebagai Anggota.",
+            time = "22 Agu 2026, 10:30",
+            isNew = false
+        ),
+        NotifItem(
+            icon = Icons.Default.AccountBalanceWallet,
+            iconColor = IncomeGreen,
+            title = "Pembayaran Kas Massal",
+            desc = "22 siswa telah membayar iuran kas Agustus 2026 secara bersamaan. Total: Rp 220.000.",
+            time = "21 Agu 2026, 08:45",
+            isNew = false
+        ),
+        NotifItem(
+            icon = Icons.Default.Done,
+            iconColor = IncomeGreen,
+            title = "Backup Berhasil",
+            desc = "Data kas kelas berhasil dicadangkan ke penyimpanan lokal perangkat.",
+            time = "20 Agu 2026, 18:00",
+            isNew = false
+        ),
+        NotifItem(
+            icon = Icons.Default.Favorite,
+            iconColor = HeaderBlue,
+            title = "Rilis Awal KasKu v1.0.0",
+            desc = "Selamat datang di KasKu! Aplikasi kas kelas digital untuk XII PPLG telah siap digunakan.",
+            time = "19 Agu 2026, 07:00",
+            isNew = false
+        )
+    )
+
+    androidx.compose.material3.ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        containerColor = MaterialTheme.colorScheme.background,
+        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 8.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Notifikasi",
+                    style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                    color = textPrimary
+                )
+                Text(
+                    text = "${notifications.count { it.isNew }} baru",
+                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                    color = HeaderBlue
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            LazyColumn(
+                modifier = Modifier.height(450.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                itemsIndexed(notifications) { _, notif ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(14.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = if (notif.isNew) notif.iconColor.copy(alpha = 0.06f) else cardColor
+                        ),
+                        elevation = CardDefaults.cardElevation(defaultElevation = if (notif.isNew) 2.dp else 0.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(14.dp),
+                            verticalAlignment = Alignment.Top
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .clip(CircleShape)
+                                    .background(notif.iconColor.copy(alpha = 0.15f)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    notif.icon,
+                                    contentDescription = null,
+                                    tint = notif.iconColor,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.width(12.dp))
+
+                            Column(modifier = Modifier.weight(1f)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = notif.title,
+                                        style = MaterialTheme.typography.bodyMedium.copy(
+                                            fontWeight = if (notif.isNew) FontWeight.Bold else FontWeight.SemiBold
+                                        ),
+                                        color = textPrimary,
+                                        modifier = Modifier.weight(1f)
+                                    )
+                                    if (notif.isNew) {
+                                        Box(
+                                            modifier = Modifier
+                                                .padding(start = 8.dp)
+                                                .size(8.dp)
+                                                .clip(CircleShape)
+                                                .background(HeaderBlue)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = notif.desc,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = textSecondary
+                                )
+                                Spacer(modifier = Modifier.height(6.dp))
+                                Text(
+                                    text = notif.time,
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = textSecondary.copy(alpha = 0.7f)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
