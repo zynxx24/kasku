@@ -18,9 +18,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -47,6 +49,7 @@ import com.kasku.app.theme.TextDark
 import com.kasku.app.theme.TextGray
 import com.kasku.app.ui.screens.AddTransactionDialog
 import com.kasku.app.ui.screens.HomeScreen
+import com.kasku.app.ui.screens.JadwalScreen
 import com.kasku.app.ui.screens.LoginScreen
 import com.kasku.app.ui.screens.ProfileScreen
 import com.kasku.app.ui.screens.RegisterScreen
@@ -93,6 +96,7 @@ enum class Screen(
 ) {
     SETTINGS("Pengaturan", Icons.Filled.Settings, Icons.Outlined.Settings),
     HOME("Beranda", Icons.Filled.Home, Icons.Outlined.Home),
+    SCHEDULE("Jadwal", Icons.Filled.CalendarMonth, Icons.Outlined.CalendarMonth),
     PROFILE("Profil", Icons.Filled.Person, Icons.Outlined.Person)
 }
 
@@ -187,6 +191,7 @@ fun KaskuApp(viewModel: KaskuViewModel) {
                         viewModel = viewModel,
                         onAddTransactionClick = { showAddDialog = true }
                     )
+                    Screen.SCHEDULE -> JadwalScreen()
                     Screen.SETTINGS -> SettingsScreen(
                         userProfile = userProfile,
                         settings = settings,
