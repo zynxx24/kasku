@@ -29,12 +29,12 @@ data class Member(
 data class UserProfile(
     val name: String = "",
     val email: String = "",
-    val classGroup: String = "XII PPLG"
+    val classGroup: String = "XII PPLG",
+    val role: String = "Anggota"
 )
 
 data class AppSettings(
     val notificationsEnabled: Boolean = true,
-    val isDarkMode: Boolean = false,
     val weeklyFee: Double = 10000.0,
-    val appVersion: String = "1.0.1"
+    val appVersion: String = "1.3.0"
 )

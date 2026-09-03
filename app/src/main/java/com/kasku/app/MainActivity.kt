@@ -74,8 +74,7 @@ class MainActivity : ComponentActivity() {
         viewModel = ViewModelProvider(this, factory)[KaskuViewModel::class.java]
 
         setContent {
-            val settings by viewModel.settings.collectAsState()
-            KaskuTheme(darkTheme = settings.isDarkMode) {
+            KaskuTheme {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -139,7 +138,7 @@ fun KaskuApp(viewModel: KaskuViewModel) {
         containerColor = Color.Transparent,
         bottomBar = {
             NavigationBar(
-                containerColor = if (settings.isDarkMode) Color(0xFF1E1E1E) else Color.White,
+                containerColor = Color.White,
                 tonalElevation = 4.dp,
                 modifier = Modifier.windowInsetsPadding(WindowInsets.navigationBars)
             ) {
@@ -163,8 +162,8 @@ fun KaskuApp(viewModel: KaskuViewModel) {
                             )
                         },
                         colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = if (settings.isDarkMode) Color.White else TextDark,
-                            selectedTextColor = if (settings.isDarkMode) Color.White else TextDark,
+                            selectedIconColor = TextDark,
+                            selectedTextColor = TextDark,
                             unselectedIconColor = TextGray,
                             unselectedTextColor = TextGray,
                             indicatorColor = Color.Transparent

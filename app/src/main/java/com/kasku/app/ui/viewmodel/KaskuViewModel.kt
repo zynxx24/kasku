@@ -22,7 +22,8 @@ data class KaskuUiState(
     val transactions: List<CashTransaction> = emptyList(),
     val members: List<Member> = emptyList(),
     val paidCountThisWeek: Int = 0,
-    val totalMembersCount: Int = 0
+    val totalMembersCount: Int = 0,
+    val weeklyIncomeData: List<Pair<String, Double>> = emptyList()
 )
 
 class KaskuViewModel(
@@ -56,7 +57,8 @@ class KaskuViewModel(
             transactions = transactions,
             members = members,
             paidCountThisWeek = paidCount,
-            totalMembersCount = members.size
+            totalMembersCount = members.size,
+            weeklyIncomeData = repository.getWeeklyIncomeData()
         )
     }.stateIn(
         scope = viewModelScope,
@@ -119,4 +121,8 @@ class KaskuViewModel(
     }
 
     fun formatRupiah(amount: Double): String = repository.formatRupiah(amount)
+
+    fun calculatePenalty(member: Member): Double = repository.calculatePenalty(member)
+
+    fun getUnpaidMonthsWithDelay(member: Member) = repository.getUnpaidMonthsWithDelay(member)
 }
