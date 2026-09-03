@@ -23,7 +23,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
 import androidx.compose.material.icons.filled.Backup
 import androidx.compose.material.icons.filled.ChevronRight
-import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Description
 import androidx.compose.material.icons.filled.Info
@@ -66,7 +65,6 @@ fun SettingsScreen(
 ) {
     val context = LocalContext.current
     var notifEnabled by remember(settings) { mutableStateOf(settings.notificationsEnabled) }
-    var darkModeEnabled by remember(settings) { mutableStateOf(settings.isDarkMode) }
 
     var showResetDialog by remember { mutableStateOf(false) }
     var showBackupDialog by remember { mutableStateOf(false) }
@@ -75,7 +73,7 @@ fun SettingsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(if (settings.isDarkMode) TextDark else WhiteBackground)
+            .background(WhiteBackground)
     ) {
         // Header
         Box(
@@ -102,14 +100,12 @@ fun SettingsScreen(
         ) {
             item { Spacer(modifier = Modifier.height(4.dp)) }
 
-            // Toggle section card (Notifikasi + Mode Gelap)
+            // Toggle section card (Notifikasi only)
             item {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = if (settings.isDarkMode) CardBlue else CardWhite
-                    ),
+                    colors = CardDefaults.cardColors(containerColor = CardWhite),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp)) {
@@ -140,7 +136,7 @@ fun SettingsScreen(
                                         style = MaterialTheme.typography.titleMedium.copy(
                                             fontWeight = FontWeight.Bold
                                         ),
-                                        color = if (settings.isDarkMode) Color.White else TextDark
+                                        color = TextDark
                                     )
                                     Text(
                                         "Aktifkan Atau Nonaktifkan",
@@ -163,61 +159,6 @@ fun SettingsScreen(
                                 )
                             )
                         }
-
-                        Spacer(modifier = Modifier.height(12.dp))
-                        HorizontalDivider(color = DividerGray)
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        // Mode Gelap
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Box(
-                                    modifier = Modifier
-                                        .size(40.dp)
-                                        .clip(CircleShape)
-                                        .background(HeaderBlue),
-                                    contentAlignment = Alignment.Center
-                                ) {
-                                    Icon(
-                                        Icons.Default.DarkMode, null,
-                                        tint = Color.White,
-                                        modifier = Modifier.size(22.dp)
-                                    )
-                                }
-                                Spacer(modifier = Modifier.width(14.dp))
-                                Column {
-                                    Text(
-                                        "Mode Gelap",
-                                        style = MaterialTheme.typography.titleMedium.copy(
-                                            fontWeight = FontWeight.Bold
-                                        ),
-                                        color = if (settings.isDarkMode) Color.White else TextDark
-                                    )
-                                    Text(
-                                        "Ubah tampilan ke mode gelap",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = TextGray
-                                    )
-                                }
-                            }
-                            Switch(
-                                checked = darkModeEnabled,
-                                onCheckedChange = {
-                                    darkModeEnabled = it
-                                    onUpdateSettings(settings.copy(isDarkMode = it))
-                                },
-                                colors = SwitchDefaults.colors(
-                                    checkedThumbColor = Color.White,
-                                    checkedTrackColor = HeaderBlue,
-                                    uncheckedThumbColor = TextGray,
-                                    uncheckedTrackColor = DividerGray
-                                )
-                            )
-                        }
                     }
                 }
             }
@@ -227,9 +168,7 @@ fun SettingsScreen(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = if (settings.isDarkMode) CardBlue else CardWhite
-                    ),
+                    colors = CardDefaults.cardColors(containerColor = CardWhite),
                     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
                 ) {
                     Column {
@@ -238,7 +177,6 @@ fun SettingsScreen(
                             iconBg = HeaderBlue,
                             title = "Backup Data",
                             subtitle = "Simpan Data Ke Google Drive",
-                            isDarkMode = settings.isDarkMode,
                             onClick = { showBackupDialog = true }
                         )
                         HorizontalDivider(
@@ -250,7 +188,6 @@ fun SettingsScreen(
                             iconBg = HeaderBlue,
                             title = "Export Laporan",
                             subtitle = "Export Laporan Ke PDF/excel/TXT",
-                            isDarkMode = settings.isDarkMode,
                             onClick = { showExportDialog = true }
                         )
                         HorizontalDivider(
@@ -263,7 +200,6 @@ fun SettingsScreen(
                             title = "Reset Data",
                             subtitle = "Hapus data Aplikasi",
                             subtitleColor = ExpenseRed,
-                            isDarkMode = settings.isDarkMode,
                             onClick = { showResetDialog = true }
                         )
                         HorizontalDivider(
@@ -276,7 +212,6 @@ fun SettingsScreen(
                             title = "Versi aplikasi",
                             subtitle = "Versi ${settings.appVersion}",
                             showChevron = false,
-                            isDarkMode = settings.isDarkMode,
                             onClick = {}
                         )
                         HorizontalDivider(
@@ -288,7 +223,6 @@ fun SettingsScreen(
                             iconBg = HeaderBlue,
                             title = "Bantuan",
                             subtitle = "Hubungi WA: +62 812-3720-1227",
-                            isDarkMode = settings.isDarkMode,
                             onClick = {
                                 try {
                                     val waUrl = "https://wa.me/6281237201227"
@@ -341,7 +275,7 @@ fun SettingsScreen(
                     showExportDialog = false
                     val reportContent = """
                         --- LAPORAN KAS KELAS ---
-                        Tanggal: 23 Agustus 2026
+                        Tanggal: 03 September 2026
                         Total Anggota: 33 Siswa
                         Sudah Bayar: 22 Siswa
                         Belum Bayar: 11 Siswa
@@ -405,7 +339,6 @@ private fun SettingsMenuItem(
     subtitle: String,
     subtitleColor: Color = TextGray,
     showChevron: Boolean = true,
-    isDarkMode: Boolean = false,
     onClick: () -> Unit
 ) {
     Row(
@@ -429,7 +362,7 @@ private fun SettingsMenuItem(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                color = if (isDarkMode) Color.White else TextDark
+                color = TextDark
             )
             Text(
                 text = subtitle,

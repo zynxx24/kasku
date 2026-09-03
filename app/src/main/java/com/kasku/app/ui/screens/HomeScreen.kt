@@ -1,6 +1,7 @@
 package com.kasku.app.ui.screens
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,8 @@ import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.TrendingUp
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -48,7 +51,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -311,6 +322,17 @@ fun HomeScreen(
                 }
             }
 
+            // Line Chart Pemasukan Per Minggu
+            item {
+                WeeklyIncomeChartCard(
+                    weeklyData = uiState.weeklyIncomeData,
+                    viewModel = viewModel,
+                    cardColor = cardColor,
+                    textPrimary = textPrimary,
+                    textSecondary = textSecondary
+                )
+            }
+
             // Aksi cepat
             item {
                 Text(
@@ -547,6 +569,7 @@ fun HomeScreen(
     if (showMemberSheet) {
         DaftarSiswaSheet(
             uiState = uiState,
+            viewModel = viewModel,
             selectedMonth = selectedMonth,
             onDismiss = { showMemberSheet = false }
         )
@@ -605,6 +628,216 @@ fun QuickActionItem(
             modifier = Modifier.width(64.dp),
             textAlign = androidx.compose.ui.text.style.TextAlign.Center
         )
+    }
+}
+
+// ── Weekly Income Line Chart ─────────────────────────────────────────────
+@Composable
+fun WeeklyIncomeChartCard(
+    weeklyData: List<Pair<String, Double>>,
+    viewModel: KaskuViewModel,
+    cardColor: Color,
+    textPrimary: Color,
+    textSecondary: Color
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = cardColor),
+        border = CardDefaults.outlinedCardBorder()
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    Icons.Default.TrendingUp,
+                    contentDescription = null,
+                    tint = HeaderBlue,
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Pemasukan Per Minggu",
+                    style = MaterialTheme.typography.titleSmall.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = textPrimary
+                )
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Perbandingan iuran kas masuk per minggu",
+                style = MaterialTheme.typography.labelSmall,
+                color = textSecondary
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+
+            if (weeklyData.isEmpty() || weeklyData.all { it.second == 0.0 }) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(160.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Belum ada data pemasukan",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = textSecondary
+                    )
+                }
+            } else {
+                WeeklyIncomeChart(
+                    weeklyData = weeklyData,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(160.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            // Weekly totals row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                weeklyData.forEach { (label, amount) ->
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = label,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = textSecondary
+                        )
+                        Text(
+                            text = viewModel.formatRupiah(amount),
+                            style = MaterialTheme.typography.labelSmall.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            color = if (amount > 0) IncomeGreen else textSecondary
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun WeeklyIncomeChart(
+    weeklyData: List<Pair<String, Double>>,
+    modifier: Modifier = Modifier
+) {
+    val values = weeklyData.map { it.second.toFloat() }
+    val maxVal = values.maxOrNull()?.coerceAtLeast(1f) ?: 1f
+    val lineColor = HeaderBlue
+    val dotColor = HeaderBlue
+    val fillColorTop = HeaderBlue.copy(alpha = 0.25f)
+    val fillColorBottom = HeaderBlue.copy(alpha = 0.02f)
+    val gridColor = DividerGray
+    val labelColor = TextGray.toArgb()
+
+    Canvas(modifier = modifier) {
+        val paddingLeft = 16.dp.toPx()
+        val paddingRight = 16.dp.toPx()
+        val paddingTop = 12.dp.toPx()
+        val paddingBottom = 28.dp.toPx()
+
+        val chartWidth = size.width - paddingLeft - paddingRight
+        val chartHeight = size.height - paddingTop - paddingBottom
+
+        val stepX = if (values.size > 1) chartWidth / (values.size - 1) else chartWidth
+
+        // Draw horizontal grid lines (3 lines)
+        val dashEffect = PathEffect.dashPathEffect(floatArrayOf(8f, 8f), 0f)
+        for (i in 0..2) {
+            val y = paddingTop + chartHeight * (1f - i / 2f)
+            drawLine(
+                color = gridColor,
+                start = Offset(paddingLeft, y),
+                end = Offset(size.width - paddingRight, y),
+                pathEffect = dashEffect,
+                strokeWidth = 1.dp.toPx()
+            )
+        }
+
+        // Calculate points
+        val points = values.mapIndexed { index, value ->
+            val x = paddingLeft + index * stepX
+            val y = paddingTop + chartHeight * (1f - value / maxVal)
+            Offset(x, y)
+        }
+
+        // Draw gradient fill area
+        if (points.size >= 2) {
+            val fillPath = Path().apply {
+                moveTo(points.first().x, paddingTop + chartHeight)
+                points.forEach { lineTo(it.x, it.y) }
+                lineTo(points.last().x, paddingTop + chartHeight)
+                close()
+            }
+            drawPath(
+                path = fillPath,
+                brush = Brush.verticalGradient(
+                    colors = listOf(fillColorTop, fillColorBottom),
+                    startY = paddingTop,
+                    endY = paddingTop + chartHeight
+                )
+            )
+
+            // Draw line
+            val linePath = Path().apply {
+                moveTo(points[0].x, points[0].y)
+                for (i in 1 until points.size) {
+                    lineTo(points[i].x, points[i].y)
+                }
+            }
+            drawPath(
+                path = linePath,
+                color = lineColor,
+                style = Stroke(
+                    width = 3.dp.toPx(),
+                    cap = StrokeCap.Round
+                )
+            )
+        }
+
+        // Draw dots and labels
+        points.forEachIndexed { index, point ->
+            // Outer glow
+            drawCircle(
+                color = dotColor.copy(alpha = 0.2f),
+                radius = 8.dp.toPx(),
+                center = point
+            )
+            // Inner dot
+            drawCircle(
+                color = dotColor,
+                radius = 4.5.dp.toPx(),
+                center = point
+            )
+            // Center white
+            drawCircle(
+                color = Color.White,
+                radius = 2.5.dp.toPx(),
+                center = point
+            )
+
+            // Draw week labels at bottom
+            val label = weeklyData[index].first
+            drawContext.canvas.nativeCanvas.drawText(
+                label,
+                point.x,
+                size.height - 4.dp.toPx(),
+                android.graphics.Paint().apply {
+                    color = labelColor
+                    textSize = 10.sp.toPx()
+                    textAlign = android.graphics.Paint.Align.CENTER
+                    isAntiAlias = true
+                }
+            )
+        }
     }
 }
 
@@ -889,6 +1122,7 @@ fun RiwayatTransaksiSheet(
 @Composable
 fun DaftarSiswaSheet(
     uiState: KaskuUiState,
+    viewModel: KaskuViewModel,
     selectedMonth: String,
     onDismiss: () -> Unit
 ) {
@@ -926,7 +1160,7 @@ fun DaftarSiswaSheet(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Month headers
+            // Month headers + Denda column
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
@@ -937,9 +1171,15 @@ fun DaftarSiswaSheet(
                         text = shortMonth,
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                         color = if (month == selectedMonth) HeaderBlue else textSecondary,
-                        modifier = Modifier.padding(horizontal = 12.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
+                Text(
+                    text = "Denda",
+                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                    color = ExpenseRed,
+                    modifier = Modifier.padding(start = 4.dp)
+                )
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -950,64 +1190,132 @@ fun DaftarSiswaSheet(
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 itemsIndexed(uiState.members) { index, member ->
+                    val penalty = viewModel.calculatePenalty(member)
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
                         colors = CardDefaults.cardColors(containerColor = cardColor),
                         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 14.dp, vertical = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Box(
+                        Column {
+                            Row(
                                 modifier = Modifier
-                                    .size(28.dp)
-                                    .clip(CircleShape)
-                                    .background(HeaderBlue),
-                                contentAlignment = Alignment.Center
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 14.dp, vertical = 10.dp),
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(
-                                    text = "${index + 1}",
-                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                    color = Color.White
-                                )
-                            }
-
-                            Spacer(modifier = Modifier.width(10.dp))
-
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = member.name,
-                                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
-                                    color = textPrimary,
-                                    maxLines = 1
-                                )
-                                if (member.role != "Anggota") {
-                                    Text(
-                                        text = member.role,
-                                        style = MaterialTheme.typography.labelSmall,
-                                        color = HeaderBlue
-                                    )
-                                }
-                            }
-
-                            months.forEach { month ->
-                                val paid = member.monthlyPayments[month] ?: false
                                 Box(
                                     modifier = Modifier
-                                        .padding(horizontal = 8.dp)
-                                        .size(24.dp)
+                                        .size(28.dp)
                                         .clip(CircleShape)
-                                        .background(if (paid) IncomeGreen.copy(alpha = 0.15f) else ExpenseRed.copy(alpha = 0.15f)),
+                                        .background(HeaderBlue),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Text(
-                                        text = if (paid) "V" else "X",
-                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
-                                        color = if (paid) IncomeGreen else ExpenseRed
+                                        text = "${index + 1}",
+                                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                        color = Color.White
+                                    )
+                                }
+
+                                Spacer(modifier = Modifier.width(10.dp))
+
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = member.name,
+                                        style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
+                                        color = textPrimary,
+                                        maxLines = 1
+                                    )
+                                    if (member.role != "Anggota") {
+                                        Text(
+                                            text = member.role,
+                                            style = MaterialTheme.typography.labelSmall,
+                                            color = HeaderBlue
+                                        )
+                                    }
+                                }
+
+                                months.forEach { month ->
+                                    val paid = member.monthlyPayments[month] ?: false
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(horizontal = 4.dp)
+                                            .size(24.dp)
+                                            .clip(CircleShape)
+                                            .background(if (paid) IncomeGreen.copy(alpha = 0.15f) else ExpenseRed.copy(alpha = 0.15f)),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Text(
+                                            text = if (paid) "V" else "X",
+                                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
+                                            color = if (paid) IncomeGreen else ExpenseRed
+                                        )
+                                    }
+                                }
+
+                                // Penalty badge
+                                if (penalty > 0) {
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(start = 4.dp)
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .background(ExpenseRed.copy(alpha = 0.1f))
+                                            .padding(horizontal = 6.dp, vertical = 2.dp)
+                                    ) {
+                                        Text(
+                                            text = viewModel.formatRupiah(penalty),
+                                            style = MaterialTheme.typography.labelSmall.copy(
+                                                fontWeight = FontWeight.Bold,
+                                                fontSize = 8.sp
+                                            ),
+                                            color = ExpenseRed
+                                        )
+                                    }
+                                } else {
+                                    Box(
+                                        modifier = Modifier
+                                            .padding(start = 4.dp)
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .background(IncomeGreen.copy(alpha = 0.1f))
+                                            .padding(horizontal = 6.dp, vertical = 2.dp)
+                                    ) {
+                                        Text(
+                                            text = "-",
+                                            style = MaterialTheme.typography.labelSmall.copy(
+                                                fontWeight = FontWeight.Bold,
+                                                fontSize = 8.sp
+                                            ),
+                                            color = IncomeGreen
+                                        )
+                                    }
+                                }
+                            }
+
+                            // Show penalty breakdown for members with denda
+                            if (penalty > 0) {
+                                val unpaidMonths = viewModel.getUnpaidMonthsWithDelay(member)
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(ExpenseRed.copy(alpha = 0.05f))
+                                        .padding(horizontal = 52.dp, vertical = 4.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        Icons.Default.Warning,
+                                        contentDescription = null,
+                                        tint = ExpenseRed.copy(alpha = 0.7f),
+                                        modifier = Modifier.size(12.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    val detail = unpaidMonths.joinToString(", ") { (m, d) ->
+                                        "${m.substringBefore(" ")}: ${d}x denda"
+                                    }
+                                    Text(
+                                        text = detail,
+                                        style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
+                                        color = ExpenseRed.copy(alpha = 0.8f)
                                     )
                                 }
                             }
@@ -1020,6 +1328,8 @@ fun DaftarSiswaSheet(
 
             val paidCount = uiState.members.count { it.monthlyPayments[selectedMonth] == true }
             val unpaidCount = uiState.totalMembersCount - paidCount
+            val totalPenalty = uiState.members.sumOf { viewModel.calculatePenalty(it) }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
@@ -1033,6 +1343,43 @@ fun DaftarSiswaSheet(
                     Box(modifier = Modifier.size(12.dp).clip(CircleShape).background(ExpenseRed))
                     Spacer(modifier = Modifier.width(6.dp))
                     Text("Belum: $unpaidCount", style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold), color = ExpenseRed)
+                }
+            }
+
+            if (totalPenalty > 0) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(10.dp),
+                    colors = CardDefaults.cardColors(containerColor = ExpenseRed.copy(alpha = 0.08f))
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 14.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                Icons.Default.Warning,
+                                contentDescription = null,
+                                tint = ExpenseRed,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Total Denda Keseluruhan",
+                                style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
+                                color = ExpenseRed
+                            )
+                        }
+                        Text(
+                            text = viewModel.formatRupiah(totalPenalty),
+                            style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Black),
+                            color = ExpenseRed
+                        )
+                    }
                 }
             }
 

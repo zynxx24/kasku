@@ -3,7 +3,6 @@ package com.kasku.app.theme
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
-import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -30,23 +29,6 @@ private val KaskuLightColorScheme = lightColorScheme(
     onSurfaceVariant = TextGray,
     outline = BorderGray,
     outlineVariant = DividerGray
-)
-
-private val KaskuDarkColorScheme = darkColorScheme(
-    primary = HeaderBlue,
-    onPrimary = Color.White,
-    primaryContainer = HeaderBlueDark,
-    onPrimaryContainer = LightBlue,
-    secondary = CardBlue,
-    onSecondary = Color.White,
-    background = Color(0xFF121212),
-    onBackground = Color(0xFFE0E0E0),
-    surface = Color(0xFF1E1E1E),
-    onSurface = Color(0xFFE0E0E0),
-    surfaceVariant = Color(0xFF2C2C2C),
-    onSurfaceVariant = Color(0xFF9E9E9E),
-    outline = Color(0xFF424242),
-    outlineVariant = Color(0xFF303030)
 )
 
 private val KaskuTypography = Typography(
@@ -130,26 +112,23 @@ private val KaskuTypography = Typography(
 
 @Composable
 fun KaskuTheme(
-    darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (darkTheme) KaskuDarkColorScheme else KaskuLightColorScheme
-
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = if (darkTheme) Color(0xFF0D47A1).toArgb() else HeaderBlueDark.toArgb()
-            window.navigationBarColor = if (darkTheme) Color(0xFF121212).toArgb() else Color.White.toArgb()
+            window.statusBarColor = HeaderBlueDark.toArgb()
+            window.navigationBarColor = Color.White.toArgb()
             WindowCompat.setDecorFitsSystemWindows(window, false)
             val insetsController = WindowCompat.getInsetsController(window, view)
             insetsController.isAppearanceLightStatusBars = false
-            insetsController.isAppearanceLightNavigationBars = !darkTheme
+            insetsController.isAppearanceLightNavigationBars = true
         }
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = KaskuLightColorScheme,
         typography = KaskuTypography,
         content = content
     )
