@@ -5,7 +5,7 @@
 ![UI Framework](https://img.shields.io/badge/UI-Jetpack_Compose_Material3-purple.svg)
 ![Storage](https://img.shields.io/badge/Storage-Offline--First_(SharedPreferences)-orange.svg)
 ![Build Tool](https://img.shields.io/badge/Build-Gradle_(JDK_21)-darkgreen.svg)
-![Version](https://img.shields.io/badge/Version-1.3.0-brightgreen.svg)
+![Version](https://img.shields.io/badge/Version-1.4.0-brightgreen.svg)
 
 **KasKu** adalah aplikasi manajemen kas kelas modern yang dirancang khusus untuk memenuhi kebutuhan pengelolaan keuangan kelas **XII PPLG**. Aplikasi ini mengkombinasikan antarmuka yang bersih, minimalis, dan elegan dengan performa tinggi berbasis **Jetpack Compose (Material3)** dan pola arsitektur **Offline-First**.
 
@@ -14,6 +14,7 @@
 ## 📋 Daftar Isi
 
 - [🎯 Latar Belakang & Tujuan Project](#-latar-belakang--tujuan-project)
+- [🆕 Changelog v1.4.0](#-changelog-v140)
 - [🆕 Changelog v1.3.0](#-changelog-v130)
 - [💾 Mekanisme Penyimpanan Data Lokal HP](#-mekanisme-penyimpanan-data-lokal-hp)
 - [✨ Fitur-Fitur Utama](#-fitur-fitur-utama)
@@ -45,11 +46,25 @@ Dalam pengelolaan kas kelas skala menengah (33 siswa), pencatatan manual sering 
 
 ---
 
+## 🆕 Changelog v1.4.0
+
+### ✅ Fitur Baru & Perubahan
+- **⚠️ Sistem Denda Flat Rp 5.000 / Bulan**: Perhitungan denda keterlambatan kini menggunakan tarif tetap **Rp 5.000 per bulan keterlambatan** (bukan persentase 5%). Contoh: 1 bulan terlambat = Rp 5.000, 2 bulan terlambat = Rp 10.000.
+- **👤 Form Pembayaran Interaktif Admin**: Nama siswa pada form pencatatan Kas Masuk dapat diklik untuk memilih dari daftar siswa kelas XII PPLG lengkap dengan filter pencarian nama.
+- **🔒 Pembayaran Berbasis Peran (RBAC)**:
+  - **Anggota (User)**: Hanya menampilkan kartu pembayaran QRIS instan. Form input manual dan tombol simpan disembunyikan.
+  - **Administrator**: Memiliki akses penuh untuk input kas masuk/keluar, pemilih siswa dropdown, dan tombol "Kas Keluar" di halaman utama.
+
+### 🗑️ Dihapus
+- **🚫 Fitur Notifikasi**: Notifikasi dihapus sepenuhnya dari aplikasi (icon bell di header `HomeScreen`, bottom sheet log notifikasi, dan toggle notifikasi di `SettingsScreen`).
+
+---
+
 ## 🆕 Changelog v1.3.0
 
 ### ✅ Fitur Baru
 - **📈 Line Chart Pemasukan Per Minggu**: Grafik garis interaktif berbasis Canvas di halaman utama yang menampilkan perbandingan pemasukan iuran kas per minggu (Minggu 1–4) dengan gradient fill, dot markers, dan label otomatis.
-- **⚠️ Sistem Denda Keterlambatan Bayar Kas**: Denda otomatis 5% dari iuran (Rp 10.000) per bulan keterlambatan. Contoh: Juli belum bayar hingga September = 2× denda (Rp 1.000), Agustus belum bayar hingga September = 1× denda (Rp 500). Ditampilkan di DaftarSiswaSheet dengan badge denda per siswa dan ringkasan total denda keseluruhan.
+- **⚠️ Sistem Denda Keterlambatan Bayar Kas**: Denda otomatis berbasis keterlambatan bayar kas. Ditampilkan di DaftarSiswaSheet dengan badge denda per siswa dan ringkasan total denda keseluruhan.
 
 ### 🔧 Perbaikan Bug
 - **🔐 Login Hanya Akun Terdaftar**: Login sekarang hanya menerima email & password yang sesuai dengan akun terdaftar. Tidak lagi menerima sembarang input.
@@ -97,13 +112,12 @@ fun getUnpaidMonthsWithDelay(member: Member): List<Pair<String, Int>> {
     return result
 }
 
-// Hitung total denda: 5% × iuran × bulan keterlambatan
+// Hitung total denda: Rp 5.000 per bulan keterlambatan (flat rate v1.4.0)
 fun calculatePenalty(member: Member): Double {
-    val fee = _settings.value.weeklyFee  // Rp 10.000
-    val penaltyRate = 0.05
+    val dendaPerBulan = 5000.0
     var totalPenalty = 0.0
     for ((_, delay) in getUnpaidMonthsWithDelay(member)) {
-        totalPenalty += fee * penaltyRate * delay
+        totalPenalty += dendaPerBulan * delay
     }
     return totalPenalty
 }
@@ -343,12 +357,12 @@ fun resetData() {
 - Menampilkan 33 anggota kelas XII PPLG lengkap dengan peran (Ketua Kelas, Bendahara, Sekretaris, Wakil Ketua, Anggota).
 - Tracking pembayaran per bulan (contoh: **Juli 2026** & **Agustus 2026**) dengan indikator status pembayaran visual (`V` Lunas warna Hijau / `X` Belum warna Merah).
 
-### ⚠️ 4. Sistem Denda Keterlambatan Bayar Kas *(BARU v1.3.0)*
-- **Perhitungan Denda Otomatis**: 5% dari iuran (Rp 10.000) = Rp 500 per bulan keterlambatan.
-  - Contoh: Juli belum bayar hingga September = **2× denda** (Rp 1.000).
-  - Contoh: Agustus belum bayar hingga September = **1× denda** (Rp 500).
-- **Badge Denda Per Siswa**: Ditampilkan di DaftarSiswaSheet dengan warna merah.
-- **Breakdown Detail**: Menunjukkan rincian "Juli: 2x denda, Agustus: 1x denda" per siswa.
+### ⚠️ 4. Sistem Denda Keterlambatan Bayar Kas *(DIPERBAIKI v1.4.0)*
+- **Perhitungan Denda Otomatis (Flat Rate)**: Rp 5.000 per bulan keterlambatan.
+  - Contoh: 1 bulan keterlambatan (Agustus belum bayar) = **Rp 5.000**.
+  - Contoh: 2 bulan keterlambatan (Juli & Agustus belum bayar) = **2× Rp 5.000 = Rp 10.000**.
+- **Badge Denda Per Siswa**: Ditampilkan di `DaftarSiswaSheet` dengan warna merah.
+- **Breakdown Detail**: Menunjukkan rincian bulan terlambat & nominal denda per siswa.
 - **Total Denda Keseluruhan**: Kartu ringkasan total denda seluruh kelas di bagian bawah sheet.
 
 ### 🗓️ 5. Pemilih Bulan Aktif (Month Selector)
@@ -780,17 +794,17 @@ adb install -r KasKu.apk
 | 20 | KOMANG DIAH PUTRI PRATIWI | Anggota | Lunas (V) | Lunas (V) | - |
 | 21 | LUH RIA MIRASIH | Anggota | Lunas (V) | Lunas (V) | - |
 | 22 | NI KADEK ADELIA CAHYA KENCANA PUTRI | Anggota | Lunas (V) | Lunas (V) | - |
-| 23 | NI KADEK LINA ANTIKA DEWI | Anggota | Lunas (V) | Belum (X) | Rp 500 |
-| 24 | NI KOMANG KIRANA PARAMITA ARDANARI | Anggota | Lunas (V) | Belum (X) | Rp 500 |
-| 25 | NI KOMANG SEPTIARINI | Anggota | Lunas (V) | Belum (X) | Rp 500 |
-| 26 | NI LUH PUTU KESYA ASTRI MELANI | Anggota | Lunas (V) | Belum (X) | Rp 500 |
-| 27 | NI PUTU CAHAYA LESTARI DEWI | Anggota | Lunas (V) | Belum (X) | Rp 500 |
-| 28 | NI PUTU INTAN LESTARI DARMAYANTI | Anggota | Lunas (V) | Belum (X) | Rp 500 |
-| 29 | OKTA PRADIPTA ATTALA DZAKI | Anggota | Belum (X) | Belum (X) | Rp 1.500 |
-| 30 | PUTU BAYU SATRIA WANGSA BUKIAN | Anggota | Belum (X) | Belum (X) | Rp 1.500 |
-| 31 | PUTU NANDA LINDIA MAHARANI | Anggota | Belum (X) | Belum (X) | Rp 1.500 |
-| 32 | PUTU PUTRI CAHYANI | Anggota | Belum (X) | Belum (X) | Rp 1.500 |
-| 33 | RADITYA RONDI | Anggota | Belum (X) | Belum (X) | Rp 1.500 |
+| 23 | NI KADEK LINA ANTIKA DEWI | Anggota | Lunas (V) | Belum (X) | Rp 5.000 |
+| 24 | NI KOMANG KIRANA PARAMITA ARDANARI | Anggota | Lunas (V) | Belum (X) | Rp 5.000 |
+| 25 | NI KOMANG SEPTIARINI | Anggota | Lunas (V) | Belum (X) | Rp 5.000 |
+| 26 | NI LUH PUTU KESYA ASTRI MELANI | Anggota | Lunas (V) | Belum (X) | Rp 5.000 |
+| 27 | NI PUTU CAHAYA LESTARI DEWI | Anggota | Lunas (V) | Belum (X) | Rp 5.000 |
+| 28 | NI PUTU INTAN LESTARI DARMAYANTI | Anggota | Lunas (V) | Belum (X) | Rp 5.000 |
+| 29 | OKTA PRADIPTA ATTALA DZAKI | Anggota | Belum (X) | Belum (X) | Rp 10.000 |
+| 30 | PUTU BAYU SATRIA WANGSA BUKIAN | Anggota | Belum (X) | Belum (X) | Rp 10.000 |
+| 31 | PUTU NANDA LINDIA MAHARANI | Anggota | Belum (X) | Belum (X) | Rp 10.000 |
+| 32 | PUTU PUTRI CAHYANI | Anggota | Belum (X) | Belum (X) | Rp 10.000 |
+| 33 | RADITYA RONDI | Anggota | Belum (X) | Belum (X) | Rp 10.000 |
 
 ---
 
