@@ -195,7 +195,11 @@ class KaskuRepository(context: Context? = null) {
         val key = email.trim().lowercase()
         val stored = registeredUsers[key]
         if (stored != null && stored.second == password) {
-            _userProfile.value = UserProfile(name = stored.first, email = key, role = stored.third)
+            val fmt = java.text.SimpleDateFormat("dd MMMM yyyy", java.util.Locale("id", "ID"))
+            val now = fmt.format(java.util.Date())
+            val oldProfile = _userProfile.value
+            val joinDate = if (oldProfile.joinedDate.isNotBlank()) oldProfile.joinedDate else now
+            _userProfile.value = UserProfile(name = stored.first, email = key, role = stored.third, joinedDate = joinDate, lastLogin = now)
             saveToPrefs()
             return true
         }
@@ -205,8 +209,10 @@ class KaskuRepository(context: Context? = null) {
     fun register(name: String, email: String, password: String): Boolean {
         val key = email.trim().lowercase()
         if (registeredUsers.containsKey(key)) return false
+        val fmt = java.text.SimpleDateFormat("dd MMMM yyyy", java.util.Locale("id", "ID"))
+        val now = fmt.format(java.util.Date())
         registeredUsers[key] = Triple(name.trim(), password, "Anggota")
-        _userProfile.value = UserProfile(name = name.trim(), email = key, role = "Anggota")
+        _userProfile.value = UserProfile(name = name.trim(), email = key, role = "Anggota", joinedDate = now, lastLogin = now)
         saveToPrefs()
         return true
     }

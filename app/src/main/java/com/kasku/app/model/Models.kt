@@ -30,7 +30,9 @@ data class UserProfile(
     val name: String = "",
     val email: String = "",
     val classGroup: String = "XII PPLG",
-    val role: String = "Anggota"
+    val role: String = "Anggota",
+    val joinedDate: String = "",
+    val lastLogin: String = ""
 )
 
 data class AppSettings(
