@@ -34,7 +34,6 @@ data class UserProfile(
 )
 
 data class AppSettings(
-    val notificationsEnabled: Boolean = true,
     val weeklyFee: Double = 10000.0,
-    val appVersion: String = "1.3.0"
+    val appVersion: String = "1.4.0"
 )

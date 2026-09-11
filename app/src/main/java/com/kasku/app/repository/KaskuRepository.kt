@@ -162,7 +162,6 @@ class KaskuRepository(context: Context? = null) {
             putString("user_name", _userProfile.value.name)
             putString("user_email", _userProfile.value.email)
             putString("user_role", _userProfile.value.role)
-            putBoolean("notif_enabled", _settings.value.notificationsEnabled)
             apply()
         }
     }
@@ -175,13 +174,12 @@ class KaskuRepository(context: Context? = null) {
         val name = prefs.getString("user_name", "Akun") ?: "Akun"
         val email = prefs.getString("user_email", "AkunKu1234@gmail.com") ?: "AkunKu1234@gmail.com"
         val role = prefs.getString("user_role", "Anggota") ?: "Anggota"
-        val notifEnabled = prefs.getBoolean("notif_enabled", true)
 
         _userProfile.value = UserProfile(name = name, email = email, role = role)
-        _settings.value = AppSettings(notificationsEnabled = notifEnabled)
+        _settings.value = AppSettings()
         loadInitialData()
         _userProfile.value = UserProfile(name = name, email = email, role = role)
-        _settings.value = AppSettings(notificationsEnabled = notifEnabled)
+        _settings.value = AppSettings()
     }
 
     // ── Auth ──────────────────────────────────────────────────────────────────
@@ -252,14 +250,13 @@ class KaskuRepository(context: Context? = null) {
 
     /**
      * Calculate total denda (penalty) for a member.
-     * Denda = 5% × iuran (Rp 10.000) × jumlah bulan keterlambatan per bulan yang belum dibayar.
+     * Denda = Rp 5.000 per bulan keterlambatan per bulan yang belum dibayar.
      */
     fun calculatePenalty(member: Member): Double {
-        val fee = _settings.value.weeklyFee  // Rp 10.000
-        val penaltyRate = 0.05
+        val dendaPerBulan = 5000.0
         var totalPenalty = 0.0
         for ((_, delay) in getUnpaidMonthsWithDelay(member)) {
-            totalPenalty += fee * penaltyRate * delay
+            totalPenalty += dendaPerBulan * delay
         }
         return totalPenalty
     }

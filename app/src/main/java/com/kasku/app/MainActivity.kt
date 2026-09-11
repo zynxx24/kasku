@@ -111,6 +111,7 @@ fun KaskuApp(viewModel: KaskuViewModel) {
     var authScreen by remember { mutableStateOf(AuthScreen.LOGIN) }
     var currentScreen by remember { mutableStateOf(Screen.HOME) }
     var showAddDialog by remember { mutableStateOf(false) }
+    val isAdmin = userProfile.role == "Administrator"
 
     // Auth flow
     if (!isLoggedIn) {
@@ -188,6 +189,7 @@ fun KaskuApp(viewModel: KaskuViewModel) {
                     Screen.HOME -> HomeScreen(
                         uiState = uiState,
                         viewModel = viewModel,
+                        isAdmin = isAdmin,
                         onAddTransactionClick = { showAddDialog = true }
                     )
                     Screen.SCHEDULE -> JadwalScreen()
@@ -208,6 +210,8 @@ fun KaskuApp(viewModel: KaskuViewModel) {
 
             if (showAddDialog) {
                 AddTransactionDialog(
+                    isAdmin = isAdmin,
+                    members = uiState.members,
                     onDismiss = { showAddDialog = false },
                     onAddTransaction = { title, amount, type, category, memberName ->
                         viewModel.addTransaction(title, amount, type, category, memberName)

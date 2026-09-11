@@ -10,21 +10,29 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -48,12 +56,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.kasku.app.R
+import com.kasku.app.model.Member
 import com.kasku.app.model.TransactionType
 import com.kasku.app.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTransactionDialog(
+    isAdmin: Boolean,
+    members: List<Member>,
     onDismiss: () -> Unit,
     onAddTransaction: (title: String, amount: Double, type: TransactionType, category: String, memberName: String?) -> Unit
 ) {
@@ -62,7 +73,8 @@ fun AddTransactionDialog(
     var category by remember { mutableStateOf("Kas Kelas") }
     var memberName by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf(TransactionType.INCOME) }
-    var showQrisModal by remember { mutableStateOf(false) }
+    var showQrisModal by remember { mutableStateOf(!isAdmin) } // Auto-open QRIS for user
+    var showMemberDropdown by remember { mutableStateOf(false) }
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
@@ -102,74 +114,78 @@ fun AddTransactionDialog(
                 .padding(top = 8.dp)
                 .navigationBarsPadding()
         ) {
-            // Type selector (Kas Masuk / Kas Keluar)
-            val isIncome = selectedType == TransactionType.INCOME
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(WhiteBackground)
-                    .padding(4.dp),
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Box(
+            // ── Admin: Type selector (Kas Masuk / Kas Keluar) ──
+            if (isAdmin) {
+                val isIncome = selectedType == TransactionType.INCOME
+                Row(
                     modifier = Modifier
-                        .weight(1f)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(if (isIncome) IncomeGreen else Color.Transparent)
-                        .clickable { selectedType = TransactionType.INCOME }
-                        .padding(vertical = 12.dp),
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(WhiteBackground)
+                        .padding(4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            Icons.Default.ArrowUpward,
-                            contentDescription = null,
-                            tint = if (isIncome) Color.White else TextGray,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "Kas Masuk",
-                            style = MaterialTheme.typography.labelLarge.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            color = if (isIncome) Color.White else TextGray
-                        )
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(if (isIncome) IncomeGreen else Color.Transparent)
+                            .clickable { selectedType = TransactionType.INCOME }
+                            .padding(vertical = 12.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                Icons.Default.ArrowUpward,
+                                contentDescription = null,
+                                tint = if (isIncome) Color.White else TextGray,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Kas Masuk",
+                                style = MaterialTheme.typography.labelLarge.copy(
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                color = if (isIncome) Color.White else TextGray
+                            )
+                        }
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(if (!isIncome) ExpenseRed else Color.Transparent)
+                            .clickable { selectedType = TransactionType.EXPENSE }
+                            .padding(vertical = 12.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                Icons.Default.ArrowDownward,
+                                contentDescription = null,
+                                tint = if (!isIncome) Color.White else TextGray,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Kas Keluar",
+                                style = MaterialTheme.typography.labelLarge.copy(
+                                    fontWeight = FontWeight.Bold
+                                ),
+                                color = if (!isIncome) Color.White else TextGray
+                            )
+                        }
                     }
                 }
 
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(if (!isIncome) ExpenseRed else Color.Transparent)
-                        .clickable { selectedType = TransactionType.EXPENSE }
-                        .padding(vertical = 12.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            Icons.Default.ArrowDownward,
-                            contentDescription = null,
-                            tint = if (!isIncome) Color.White else TextGray,
-                            modifier = Modifier.size(16.dp)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "Kas Keluar",
-                            style = MaterialTheme.typography.labelLarge.copy(
-                                fontWeight = FontWeight.Bold
-                            ),
-                            color = if (!isIncome) Color.White else TextGray
-                        )
-                    }
-                }
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            val isIncome = selectedType == TransactionType.INCOME
 
-            // QRIS Card for Kas Masuk
+            // ── QRIS Card (always visible for both roles when Kas Masuk) ──
             if (isIncome) {
                 Card(
                     modifier = Modifier
@@ -251,153 +267,260 @@ fun AddTransactionDialog(
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Dynamic form fields
-            if (isIncome) {
-                Text(
-                    text = "Nama Siswa",
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    color = TextDark
-                )
-                Spacer(modifier = Modifier.height(6.dp))
-                OutlinedTextField(
-                    value = memberName,
-                    onValueChange = { memberName = it },
-                    placeholder = { Text("Masukan Nama Siswa", color = TextGray) },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = fieldColors
-                )
-            } else {
-                Text(
-                    text = "Keperluan",
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    color = TextDark
-                )
-                Spacer(modifier = Modifier.height(6.dp))
-                OutlinedTextField(
-                    value = title,
-                    onValueChange = { title = it },
-                    placeholder = { Text("Contoh: Beli alat kebersihan", color = TextGray) },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(24.dp),
-                    colors = fieldColors
-                )
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = "Nominal",
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                color = TextDark
-            )
-            Spacer(modifier = Modifier.height(6.dp))
-            OutlinedTextField(
-                value = amountText,
-                onValueChange = { amountText = it },
-                placeholder = { Text("Rp | Masukan nominal", color = TextGray) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = fieldColors
-            )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = "Keterangan",
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                color = TextDark
-            )
-            Spacer(modifier = Modifier.height(6.dp))
-            OutlinedTextField(
-                value = category,
-                onValueChange = { category = it },
-                placeholder = {
+            // ── Admin-only: Input form fields ──
+            if (isAdmin) {
+                // Dynamic form fields
+                if (isIncome) {
                     Text(
-                        if (isIncome) "Contoh: Bayar kas minggu ke 1" else "Keterangan Tambahan",
-                        color = TextGray
+                        text = "Nama Siswa",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = TextDark
                     )
-                },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = fieldColors
-            )
+                    Spacer(modifier = Modifier.height(6.dp))
 
-            Spacer(modifier = Modifier.height(12.dp))
+                    // Clickable name field with dropdown
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        OutlinedTextField(
+                            value = memberName,
+                            onValueChange = { memberName = it },
+                            placeholder = { Text("Pilih atau ketik nama siswa", color = TextGray) },
+                            singleLine = true,
+                            readOnly = false,
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(24.dp),
+                            colors = fieldColors,
+                            trailingIcon = {
+                                Icon(
+                                    if (showMemberDropdown) Icons.Default.KeyboardArrowUp
+                                    else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = "Pilih Siswa",
+                                    tint = TextGray,
+                                    modifier = Modifier.clickable {
+                                        showMemberDropdown = !showMemberDropdown
+                                    }
+                                )
+                            }
+                        )
+                    }
 
-            Text(
-                text = "Tanggal",
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                color = TextDark
-            )
-            Spacer(modifier = Modifier.height(6.dp))
-            OutlinedTextField(
-                value = "23 Agustus 2026",
-                onValueChange = {},
-                readOnly = true,
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(24.dp),
-                colors = fieldColors
-            )
+                    // Member dropdown list
+                    if (showMemberDropdown) {
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(16.dp),
+                            colors = CardDefaults.cardColors(containerColor = CardWhite),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                        ) {
+                            val filteredMembers = if (memberName.isBlank()) {
+                                members
+                            } else {
+                                members.filter {
+                                    it.name.contains(memberName, ignoreCase = true)
+                                }
+                            }
 
-            Spacer(modifier = Modifier.height(24.dp))
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 200.dp)
+                            ) {
+                                itemsIndexed(filteredMembers) { index, member ->
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable {
+                                                memberName = member.name
+                                                showMemberDropdown = false
+                                            }
+                                            .padding(horizontal = 16.dp, vertical = 10.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .size(28.dp)
+                                                .clip(CircleShape)
+                                                .background(HeaderBlue),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Icon(
+                                                Icons.Default.Person,
+                                                contentDescription = null,
+                                                tint = Color.White,
+                                                modifier = Modifier.size(16.dp)
+                                            )
+                                        }
+                                        Spacer(modifier = Modifier.width(10.dp))
+                                        Column {
+                                            Text(
+                                                text = member.name,
+                                                style = MaterialTheme.typography.bodyMedium.copy(
+                                                    fontWeight = FontWeight.SemiBold
+                                                ),
+                                                color = TextDark,
+                                                maxLines = 1
+                                            )
+                                            if (member.role != "Anggota") {
+                                                Text(
+                                                    text = member.role,
+                                                    style = MaterialTheme.typography.labelSmall,
+                                                    color = HeaderBlue
+                                                )
+                                            }
+                                        }
+                                    }
+                                    if (index < filteredMembers.lastIndex) {
+                                        HorizontalDivider(
+                                            color = DividerGray,
+                                            modifier = Modifier.padding(horizontal = 16.dp)
+                                        )
+                                    }
+                                }
 
-            // Action row
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.weight(0.4f)
-                ) {
-                    Text(
-                        "Batal",
-                        color = TextGray,
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                }
-
-                val isFormValid = if (isIncome) {
-                    memberName.isNotBlank() && (amountText.toDoubleOrNull() ?: 0.0) > 0
-                } else {
-                    title.isNotBlank() && (amountText.toDoubleOrNull() ?: 0.0) > 0
-                }
-
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .clip(RoundedCornerShape(14.dp))
-                        .background(if (isFormValid) HeaderBlue else TextLight)
-                        .clickable(enabled = isFormValid) {
-                            val amount = amountText.toDoubleOrNull() ?: 0.0
-                            val finalTitle = if (isIncome) "Iuran Kas - ${memberName.trim()}" else title
-                            onAddTransaction(
-                                finalTitle,
-                                amount,
-                                selectedType,
-                                category.ifBlank { "Kas Kelas" },
-                                memberName.trim().ifBlank { null }
-                            )
-                            onDismiss()
+                                if (filteredMembers.isEmpty()) {
+                                    item {
+                                        Text(
+                                            text = "Tidak ada siswa ditemukan",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = TextGray,
+                                            modifier = Modifier.padding(16.dp)
+                                        )
+                                    }
+                                }
+                            }
                         }
-                        .padding(vertical = 14.dp),
-                    contentAlignment = Alignment.Center
-                ) {
+                    }
+                } else {
                     Text(
-                        text = "Simpan",
-                        style = MaterialTheme.typography.labelLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        ),
-                        color = Color.White
+                        text = "Keperluan",
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                        color = TextDark
                     )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    OutlinedTextField(
+                        value = title,
+                        onValueChange = { title = it },
+                        placeholder = { Text("Contoh: Beli alat kebersihan", color = TextGray) },
+                        singleLine = true,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(24.dp),
+                        colors = fieldColors
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = "Nominal",
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = TextDark
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                OutlinedTextField(
+                    value = amountText,
+                    onValueChange = { amountText = it },
+                    placeholder = { Text("Rp | Masukan nominal", color = TextGray) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = fieldColors
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = "Keterangan",
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = TextDark
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                OutlinedTextField(
+                    value = category,
+                    onValueChange = { category = it },
+                    placeholder = {
+                        Text(
+                            if (isIncome) "Contoh: Bayar kas minggu ke 1" else "Keterangan Tambahan",
+                            color = TextGray
+                        )
+                    },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = fieldColors
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                Text(
+                    text = "Tanggal",
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                    color = TextDark
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                OutlinedTextField(
+                    value = "11 September 2026",
+                    onValueChange = {},
+                    readOnly = true,
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(24.dp),
+                    colors = fieldColors
+                )
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // Action row
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.weight(0.4f)
+                    ) {
+                        Text(
+                            "Batal",
+                            color = TextGray,
+                            style = MaterialTheme.typography.labelLarge
+                        )
+                    }
+
+                    val isFormValid = if (isIncome) {
+                        memberName.isNotBlank() && (amountText.toDoubleOrNull() ?: 0.0) > 0
+                    } else {
+                        title.isNotBlank() && (amountText.toDoubleOrNull() ?: 0.0) > 0
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(if (isFormValid) HeaderBlue else TextLight)
+                            .clickable(enabled = isFormValid) {
+                                val amount = amountText.toDoubleOrNull() ?: 0.0
+                                val finalTitle = if (isIncome) "Iuran Kas - ${memberName.trim()}" else title
+                                onAddTransaction(
+                                    finalTitle,
+                                    amount,
+                                    selectedType,
+                                    category.ifBlank { "Kas Kelas" },
+                                    memberName.trim().ifBlank { null }
+                                )
+                                onDismiss()
+                            }
+                            .padding(vertical = 14.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Simpan",
+                            style = MaterialTheme.typography.labelLarge.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            color = Color.White
+                        )
+                    }
                 }
             }
 
