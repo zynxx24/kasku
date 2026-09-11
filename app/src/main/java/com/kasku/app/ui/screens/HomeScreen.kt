@@ -86,7 +86,7 @@ fun HomeScreen(
     var showRiwayatSheet by remember { mutableStateOf(false) }
     var showMemberSheet by remember { mutableStateOf(false) }
     var showMonthPicker by remember { mutableStateOf(false) }
-    var selectedMonth by remember { mutableStateOf("Agustus 2026") }
+    var selectedMonth by remember { mutableStateOf(viewModel.getCurrentMonthLabel()) }
 
     Column(
         modifier = Modifier
@@ -578,6 +578,7 @@ fun HomeScreen(
     if (showMonthPicker) {
         MonthPickerSheet(
             selectedMonth = selectedMonth,
+            availableMonths = viewModel.getAvailableMonths(),
             onSelectMonth = { selectedMonth = it },
             onDismiss = { showMonthPicker = false }
         )
@@ -1386,13 +1387,12 @@ fun DaftarSiswaSheet(
 @Composable
 fun MonthPickerSheet(
     selectedMonth: String,
+    availableMonths: List<String>,
     onSelectMonth: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
     val textPrimary = MaterialTheme.colorScheme.onBackground
     val cardColor = MaterialTheme.colorScheme.surface
-
-    val availableMonths = listOf("Juli 2026", "Agustus 2026")
 
     androidx.compose.material3.ModalBottomSheet(
         onDismissRequest = onDismiss,

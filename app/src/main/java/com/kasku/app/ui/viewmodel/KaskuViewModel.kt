@@ -125,4 +125,8 @@ class KaskuViewModel(
     fun calculatePenalty(member: Member): Double = repository.calculatePenalty(member)
 
     fun getUnpaidMonthsWithDelay(member: Member) = repository.getUnpaidMonthsWithDelay(member)
+
+    fun getAvailableMonths(): List<String> = repository.getAvailableMonths()
+
+    fun getCurrentMonthLabel(): String = repository.getCurrentMonthLabel()
 }

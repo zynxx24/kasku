@@ -86,13 +86,18 @@ class KaskuRepository(context: Context? = null) {
         )
 
         // Generate per-member monthly payment data
+        val availableMonths = getAvailableMonths()
         val initialMembers = memberNames.mapIndexed { index, (name, role) ->
             val isPaidAugust = index < 22
             val isPaidJuli = index < 28
-            val payments = mapOf(
-                "Juli 2026" to isPaidJuli,
-                "Agustus 2026" to isPaidAugust
-            )
+            val payments = mutableMapOf<String, Boolean>()
+            for (m in availableMonths) {
+                when {
+                    m.startsWith("Juli") -> payments[m] = isPaidJuli
+                    m.startsWith("Agustus") -> payments[m] = isPaidAugust
+                    else -> payments[m] = false
+                }
+            }
             val monthsPaid = payments.values.count { it }
             Member(
                 name = name,
@@ -224,6 +229,53 @@ class KaskuRepository(context: Context? = null) {
     fun resetData() {
         prefs?.edit()?.clear()?.apply()
         loadInitialData()
+    }
+
+    // ── Month Helpers ─────────────────────────────────────────────────────────
+
+    /**
+     * Returns list of available months from Juli 2026 up to the current device month.
+     */
+    fun getAvailableMonths(): List<String> {
+        val cal = java.util.Calendar.getInstance()
+        val currentMonth = cal.get(java.util.Calendar.MONTH) // 0-based
+        val currentYear = cal.get(java.util.Calendar.YEAR)
+
+        val monthNames = listOf(
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
+
+        val startMonth = 6 // Juli (0-based)
+        val startYear = 2026
+
+        val result = mutableListOf<String>()
+        var mIdx = startMonth
+        var mYear = startYear
+
+        while (mYear < currentYear || (mYear == currentYear && mIdx <= currentMonth)) {
+            result.add("${monthNames[mIdx]} $mYear")
+            mIdx++
+            if (mIdx > 11) {
+                mIdx = 0
+                mYear++
+            }
+        }
+        return result
+    }
+
+    /**
+     * Returns current month string formatted e.g. "September 2026".
+     */
+    fun getCurrentMonthLabel(): String {
+        val cal = java.util.Calendar.getInstance()
+        val currentMonth = cal.get(java.util.Calendar.MONTH)
+        val currentYear = cal.get(java.util.Calendar.YEAR)
+        val monthNames = listOf(
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
+        return "${monthNames[currentMonth]} $currentYear"
     }
 
     // ── Penalty / Denda ───────────────────────────────────────────────────────
