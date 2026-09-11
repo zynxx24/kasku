@@ -49,10 +49,12 @@ Dalam pengelolaan kas kelas skala menengah (33 siswa), pencatatan manual sering 
 ## 🆕 Changelog v1.4.0
 
 ### ✅ Fitur Baru & Perubahan
-- **⚠️ Sistem Denda Flat Rp 5.000 / Bulan**: Perhitungan denda keterlambatan kini menggunakan tarif tetap **Rp 5.000 per bulan keterlambatan** (bukan persentase 5%). Contoh: 1 bulan terlambat = Rp 5.000, 2 bulan terlambat = Rp 10.000.
+- **💬 Tombol Konfirmasi WA di QRIS**: Menambahkan tombol "Konfirmasi Pembayaran via WA" pada tampilan QRIS (role user & admin). Mengarahkan pengguna langsung ke WhatsApp Customer Support / Admin dengan pesan konfirmasi yang sudah terisi otomatis.
+- **📅 Perhitungan Bulan Dinamis Berbasis Kalender HP**: Pelacakan bulan iuran dan denda keterlambatan kini sepenuhnya **dinamis mengikuti sistem kalender HP pengguna** (`java.util.Calendar`), bukan nilai hardcoded.
+- **⚠️ Sistem Denda Flat Rp 5.000 / Bulan**: Perhitungan denda keterlambatan menggunakan tarif tetap **Rp 5.000 per bulan yang belum dibayar** (1x denda = Rp 5.000 / bulan). Contoh: 1 bulan belum bayar = Rp 5.000, 2 bulan belum bayar = Rp 10.000.
 - **👤 Form Pembayaran Interaktif Admin**: Nama siswa pada form pencatatan Kas Masuk dapat diklik untuk memilih dari daftar siswa kelas XII PPLG lengkap dengan filter pencarian nama.
 - **🔒 Pembayaran Berbasis Peran (RBAC)**:
-  - **Anggota (User)**: Hanya menampilkan kartu pembayaran QRIS instan. Form input manual dan tombol simpan disembunyikan.
+  - **Anggota (User)**: Hanya menampilkan kartu pembayaran QRIS instan + tombol konfirmasi WA. Form input manual dan tombol simpan disembunyikan.
   - **Administrator**: Memiliki akses penuh untuk input kas masuk/keluar, pemilih siswa dropdown, dan tombol "Kas Keluar" di halaman utama.
 
 ### 🗑️ Dihapus

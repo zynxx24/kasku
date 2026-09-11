@@ -230,19 +230,40 @@ class KaskuRepository(context: Context? = null) {
 
     /**
      * Returns list of (month, delay multiplier) for unpaid months.
-     * Current month is September 2026. Months tracked: Juli, Agustus.
-     * Juli unpaid -> 2× delay (Jul->Aug, Aug->Sep)
-     * Agustus unpaid -> 1× delay (Aug->Sep)
+     * Bulan dihitung secara dinamis berdasarkan kalender perangkat.
+     * Tracking dimulai dari Juli 2026 hingga bulan sebelum bulan saat ini.
+     * Setiap bulan yang belum dibayar dikenakan denda Rp 5.000 (1x denda per bulan terlambat).
      */
     fun getUnpaidMonthsWithDelay(member: Member): List<Pair<String, Int>> {
-        val monthOrder = listOf("Juli 2026", "Agustus 2026")
-        val currentMonthIndex = 2 // September 2026 = index 2
+        val cal = java.util.Calendar.getInstance()
+        val currentMonth = cal.get(java.util.Calendar.MONTH) // 0-based (Jan=0)
+        val currentYear = cal.get(java.util.Calendar.YEAR)
+
+        val monthNames = listOf(
+            "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
+
+        // Tracking dimulai dari Juli 2026 (month index 6, year 2026)
+        val startMonth = 6 // Juli (0-based)
+        val startYear = 2026
+
         val result = mutableListOf<Pair<String, Int>>()
-        for ((idx, month) in monthOrder.withIndex()) {
-            val paid = member.monthlyPayments[month] ?: false
+
+        // Iterasi dari bulan awal hingga bulan SEBELUM bulan saat ini
+        var mIdx = startMonth
+        var mYear = startYear
+        while (mYear < currentYear || (mYear == currentYear && mIdx < currentMonth)) {
+            val monthLabel = "${monthNames[mIdx]} $mYear"
+            val paid = member.monthlyPayments[monthLabel] ?: false
             if (!paid) {
-                val delay = currentMonthIndex - idx
-                result.add(month to delay)
+                // Setiap bulan yang belum dibayar dihitung 1x denda (Rp 5.000)
+                result.add(monthLabel to 1)
+            }
+            mIdx++
+            if (mIdx > 11) {
+                mIdx = 0
+                mYear++
             }
         }
         return result

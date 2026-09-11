@@ -68,6 +68,7 @@ fun AddTransactionDialog(
     onDismiss: () -> Unit,
     onAddTransaction: (title: String, amount: Double, type: TransactionType, category: String, memberName: String?) -> Unit
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
     var title by remember { mutableStateOf("") }
     var amountText by remember { mutableStateOf("") }
     var category by remember { mutableStateOf("Kas Kelas") }
@@ -260,6 +261,29 @@ fun AddTransactionDialog(
                                 style = MaterialTheme.typography.bodySmall,
                                 color = TextGray
                             )
+                            Spacer(modifier = Modifier.height(14.dp))
+                            androidx.compose.material3.Button(
+                                onClick = {
+                                    val message = "Halo Admin KasKu, saya sudah melakukan pembayaran kas via QRIS."
+                                    val encodedMsg = java.net.URLEncoder.encode(message, "UTF-8")
+                                    val intent = android.content.Intent(
+                                        android.content.Intent.ACTION_VIEW,
+                                        android.net.Uri.parse("https://wa.me/6281237201227?text=$encodedMsg")
+                                    )
+                                    context.startActivity(intent)
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFF25D366) // WhatsApp Green
+                                ),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(
+                                    text = "💬 Konfirmasi Pembayaran via WA",
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
                     }
                 }
