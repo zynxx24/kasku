@@ -88,13 +88,15 @@ class KaskuRepository(context: Context? = null) {
         // Generate per-member monthly payment data
         val availableMonths = getAvailableMonths()
         val initialMembers = memberNames.mapIndexed { index, (name, role) ->
-            val isPaidAugust = index < 22
             val isPaidJuli = index < 28
+            val isPaidAugust = index < 22
+            val isPaidSeptember = index < 10 // Dummy: 10 siswa pertama sudah bayar September
             val payments = mutableMapOf<String, Boolean>()
             for (m in availableMonths) {
                 when {
                     m.startsWith("Juli") -> payments[m] = isPaidJuli
                     m.startsWith("Agustus") -> payments[m] = isPaidAugust
+                    m.startsWith("September") -> payments[m] = isPaidSeptember
                     else -> payments[m] = false
                 }
             }
@@ -103,7 +105,7 @@ class KaskuRepository(context: Context? = null) {
                 name = name,
                 role = role,
                 totalPaid = monthsPaid * 10000.0,
-                isPaidThisWeek = isPaidAugust,
+                isPaidThisWeek = isPaidSeptember,
                 monthlyPayments = payments
             )
         }

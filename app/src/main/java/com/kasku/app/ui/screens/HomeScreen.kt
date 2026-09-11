@@ -1123,7 +1123,7 @@ fun DaftarSiswaSheet(
     val textPrimary = MaterialTheme.colorScheme.onBackground
     val textSecondary = MaterialTheme.colorScheme.onSurfaceVariant
     val cardColor = MaterialTheme.colorScheme.surface
-    val months = listOf("Juli 2026", "Agustus 2026")
+    val months = viewModel.getAvailableMonths()
 
     androidx.compose.material3.ModalBottomSheet(
         onDismissRequest = onDismiss,

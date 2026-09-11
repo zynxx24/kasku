@@ -207,6 +207,9 @@ fun ProfileScreen(
                             color = MaterialTheme.colorScheme.outlineVariant,
                             modifier = Modifier.padding(horizontal = 20.dp)
                         )
+                        val dateFormat = java.text.SimpleDateFormat("dd MMMM yyyy", java.util.Locale("id", "ID"))
+                        val today = dateFormat.format(java.util.Date())
+
                         ProfileInfoRow(
                             icon = Icons.Default.CalendarMonth,
                             label = "Bergabung Sejak",
@@ -221,7 +224,7 @@ fun ProfileScreen(
                         ProfileInfoRow(
                             icon = Icons.Default.AccessTime,
                             label = "Terakhir Login",
-                            value = "03 September 2026",
+                            value = today,
                             textPrimary = textPrimary,
                             textSecondary = textSecondary
                         )
